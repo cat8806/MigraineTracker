@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MigraineTracker.Data;
 using MigraineTracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MigraineTracker.ViewModels
 {
@@ -49,13 +50,13 @@ namespace MigraineTracker.ViewModels
             DeleteCommand = new RelayCommand<LogItem>(DeleteItem);
         }
 
-        public void LoadData()
+        public async Task LoadDataAsync()
         {
             LogGroups.Clear();
             var items = new List<LogItem>();
             using var db = new MigraineTrackerDbContext();
 
-            foreach (var m in db.Migraines.ToList())
+            foreach (var m in await db.Migraines.ToListAsync())
             {
                 var time = m.StartTime ?? m.Date;
                 items.Add(new LogItem
@@ -69,7 +70,7 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var s in db.Supplements.ToList())
+            foreach (var s in await db.Supplements.ToListAsync())
             {
                 var time = s.TimeTaken ?? s.Date;
                 items.Add(new LogItem
@@ -83,7 +84,7 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var m in db.Meals.ToList())
+            foreach (var m in await db.Meals.ToListAsync())
             {
                 var time = m.Time ?? m.Date;
                 items.Add(new LogItem
@@ -97,7 +98,7 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var w in db.WaterIntakes.ToList())
+            foreach (var w in await db.WaterIntakes.ToListAsync())
             {
                 var time = w.Time ?? w.Date;
                 items.Add(new LogItem
@@ -111,7 +112,7 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var s in db.Sleeps.ToList())
+            foreach (var s in await db.Sleeps.ToListAsync())
             {
                 var time = s.SleepStart ?? s.Date;
                 items.Add(new LogItem

@@ -7,6 +7,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using MigraineTracker.Data;
 using MigraineTracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MigraineTracker.ViewModels
 {
@@ -97,24 +98,24 @@ namespace MigraineTracker.ViewModels
             }
         }
 
-        public void LoadRecentBatches()
+        public async Task LoadRecentBatchesAsync()
         {
             RecentBatches.Clear();
             using (var db = new MigraineTrackerDbContext())
             {
-                var lastSessionIds = db.Supplements
+                var lastSessionIds = await db.Supplements
                     .OrderByDescending(s => s.Date)
                     .Select(s => s.SaveSessionId)
                     .Distinct()
                     .Take(5)
-                    .ToList();
+                    .ToListAsync();
 
                 foreach (var sessionId in lastSessionIds)
                 {
-                    var items = db.Supplements
+                    var items = await db.Supplements
                         .Where(s => s.SaveSessionId == sessionId)
                         .OrderBy(s => s.Name)
-                        .ToList();
+                        .ToListAsync();
 
                     if (items.Any())
                     {

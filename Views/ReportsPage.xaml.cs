@@ -16,10 +16,10 @@ public partial class ReportsPage : ContentPage
         BindingContext = vm;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-        vm.LoadData();
+        await vm.LoadDataAsync();
     }
 
     private async void OnShareClicked(object sender, EventArgs e)
