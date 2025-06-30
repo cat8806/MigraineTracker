@@ -3,7 +3,6 @@ namespace MigraineTracker.Views
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
         private MainPageViewModel vm;
 
 
@@ -21,10 +20,6 @@ namespace MigraineTracker.Views
             vm.LoadTodayMeals();
             vm.LoadTodayWater();
             vm.LoadLatestSleep();
-        }
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-
         }
         private async void OnAddMigraineClicked(object sender, EventArgs e)
         {
