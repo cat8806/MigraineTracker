@@ -6,6 +6,7 @@ using System.Text;
 using CommunityToolkit.Mvvm.ComponentModel;
 using MigraineTracker.Data;
 using MigraineTracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace MigraineTracker.ViewModels;
 
@@ -33,14 +34,14 @@ public partial class ReportsPageViewModel : ObservableObject
 
     public ObservableCollection<ReportItem> Items { get; } = new();
 
-    public void LoadData()
+    public async Task LoadDataAsync()
     {
         Items.Clear();
         var list = new List<ReportItem>();
         var date = SelectedDate.Date;
         using var db = new MigraineTrackerDbContext();
 
-        foreach (var s in db.Sleeps.Where(s => s.Date == date).ToList())
+        foreach (var s in await db.Sleeps.Where(s => s.Date == date).ToListAsync())
         {
             var time = s.SleepStart ?? date;
             list.Add(new ReportItem
@@ -51,7 +52,7 @@ public partial class ReportsPageViewModel : ObservableObject
             });
         }
 
-        foreach (var m in db.Migraines.Where(m => m.Date == date).ToList())
+        foreach (var m in await db.Migraines.Where(m => m.Date == date).ToListAsync())
         {
             var time = m.StartTime ?? date;
             list.Add(new ReportItem
@@ -62,7 +63,7 @@ public partial class ReportsPageViewModel : ObservableObject
             });
         }
 
-        foreach (var meal in db.Meals.Where(meal => meal.Date == date).ToList())
+        foreach (var meal in await db.Meals.Where(meal => meal.Date == date).ToListAsync())
         {
             var time = meal.Time ?? date;
             list.Add(new ReportItem
@@ -73,7 +74,7 @@ public partial class ReportsPageViewModel : ObservableObject
             });
         }
 
-        foreach (var s in db.Supplements.Where(s => s.Date == date).ToList())
+        foreach (var s in await db.Supplements.Where(s => s.Date == date).ToListAsync())
         {
             var time = s.TimeTaken ?? date;
             list.Add(new ReportItem
@@ -84,7 +85,7 @@ public partial class ReportsPageViewModel : ObservableObject
             });
         }
 
-        foreach (var w in db.WaterIntakes.Where(w => w.Date == date).ToList())
+        foreach (var w in await db.WaterIntakes.Where(w => w.Date == date).ToListAsync())
         {
             var time = w.Time ?? date;
             list.Add(new ReportItem

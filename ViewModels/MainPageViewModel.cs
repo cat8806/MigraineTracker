@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using MigraineTracker.Data;
 using MigraineTracker.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace MigraineTracker.ViewModels
@@ -63,17 +64,17 @@ namespace MigraineTracker.ViewModels
 
         public MainPageViewModel()
         {
-            LoadLatestMigraine();
+            _ = LoadLatestMigraineAsync();
         }
 
-        public void LoadLatestMigraine()
+        public async Task LoadLatestMigraineAsync()
         {
             using (var db = new MigraineTrackerDbContext())
             {
-                var latest = db.Migraines
+                var latest = await db.Migraines
                     .OrderByDescending(m => m.Date)
                     .ThenByDescending(m => m.StartTime)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
 
                 if (latest != null)
                 {
@@ -89,51 +90,51 @@ namespace MigraineTracker.ViewModels
                 }
             }
         }
-        public void LoadTodaySupplements()
+        public async Task LoadTodaySupplementsAsync()
         {
             using (var db = new MigraineTrackerDbContext())
             {
-                var todaySupps = db.Supplements
+                var todaySupps = await db.Supplements
                     .Where(s => s.Date == DateTime.Today)
                     .Select(s => $"{s.Name} {s.DosageMg}{s.DosageUnit}")
-                    .ToList();
+                    .ToListAsync();
 
                 SupplementList = string.Join("   • ", todaySupps);
             }
         }
-        public void LoadTodayMeals()
+        public async Task LoadTodayMealsAsync()
         {
             using var db = new MigraineTrackerDbContext();
-            var list = db.Meals
+            var list = await db.Meals
                 .Where(m => m.Date == DateTime.Today && m.Time != null)   // ← filter out nulls
                 .OrderBy(m => m.Time)
                 .Select(m =>
                     $"{m.Time:hh:mm tt} {m.FoodItems}" +
                     (m.ContainsTrigger ? $" ({m.TriggerNotes})" : ""))
-                .ToList();
+                .ToListAsync();
 
             TodayMeals = list.Any()
                 ? string.Join("\n", list)
                 : "No meals logged yet.";
         }
 
-        public void LoadTodayWater()
+        public async Task LoadTodayWaterAsync()
         {
             using var db = new MigraineTrackerDbContext();
-            var total = db.WaterIntakes
+            var total = await db.WaterIntakes
                           .Where(w => w.Date == DateTime.Today)
-                          .Sum(w => (int?)w.VolumeMl) ?? 0;
+                          .SumAsync(w => (int?)w.VolumeMl) ?? 0;
 
             const int dailyGoal = 2500;  // you can make this configurable
             WaterProgress = $"{total} mL / {dailyGoal} mL";
         }
-        public void LoadLatestSleep()
+        public async Task LoadLatestSleepAsync()
         {
             using var db = new MigraineTrackerDbContext();
-            var latest = db.Sleeps
+            var latest = await db.Sleeps
                 .OrderByDescending(s => s.Date)
                 .ThenByDescending(s => s.SleepEnd)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (latest != null && latest.SleepStart.HasValue && latest.SleepEnd.HasValue)
             {

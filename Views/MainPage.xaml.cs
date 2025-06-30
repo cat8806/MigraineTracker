@@ -12,14 +12,14 @@ namespace MigraineTracker.Views
             vm = new MainPageViewModel();
             BindingContext = vm;
         }
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            vm.LoadLatestMigraine();  // Refresh when page comes back into view
-            vm.LoadTodaySupplements();
-            vm.LoadTodayMeals();
-            vm.LoadTodayWater();
-            vm.LoadLatestSleep();
+            await vm.LoadLatestMigraineAsync();  // Refresh when page comes back into view
+            await vm.LoadTodaySupplementsAsync();
+            await vm.LoadTodayMealsAsync();
+            await vm.LoadTodayWaterAsync();
+            await vm.LoadLatestSleepAsync();
         }
         private async void OnAddMigraineClicked(object sender, EventArgs e)
         {

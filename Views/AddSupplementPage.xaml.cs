@@ -9,10 +9,13 @@ namespace MigraineTracker.Views
             InitializeComponent();
         }
 
-        protected override void OnAppearing()
+        protected override async void OnAppearing()
         {
             base.OnAppearing();
-            (BindingContext as AddSupplementViewModel)?.LoadRecentBatches();
+            if (BindingContext is AddSupplementViewModel vm)
+            {
+                await vm.LoadRecentBatchesAsync();
+            }
         }
     }
 }
