@@ -96,10 +96,21 @@ namespace MigraineTracker.ViewModels
             {
                 var todaySupps = await db.Supplements
                     .Where(s => s.Date == DateTime.Today)
-                    .Select(s => $"{s.Name} {s.DosageMg}{s.DosageUnit}")
+                    .GroupBy(s => new { s.Name, s.DosageUnit })
+                    .Select(g => new
+                    {
+                        g.Key.Name,
+                        g.Key.DosageUnit,
+                        TotalDosage = g.Sum(x => x.DosageMg)
+                    })
+                    .OrderBy(r => r.Name)
                     .ToListAsync();
 
-                SupplementList = string.Join("   • ", todaySupps);
+                var list = todaySupps
+                    .Select(r => $"{r.Name} {r.TotalDosage} {r.DosageUnit}")
+                    .ToList();
+
+                SupplementList = string.Join("   • ", list);
             }
         }
         public async Task LoadTodayMealsAsync()

@@ -15,7 +15,7 @@ namespace MigraineTracker.ViewModels
     {
         public DateTime BatchDate { get; set; }
         public List<SupplementEntry> Items { get; set; }
-        public string BatchDescription => string.Join(", ", Items.Select(i => $"{i.Name} {i.DosageMg}{i.DosageUnit}"));
+        public string BatchDescription => string.Join(", ", Items.Select(i => $"{i.Name} {i.DosageMg} {i.DosageUnit}"));
     }
 
     public partial class AddSupplementViewModel : ObservableObject

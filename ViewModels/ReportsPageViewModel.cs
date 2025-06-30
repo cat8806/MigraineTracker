@@ -81,7 +81,7 @@ public partial class ReportsPageViewModel : ObservableObject
             {
                 Time = time,
                 Icon = "\uD83D\uDC8A", // 💊
-                Text = $"{s.Name} {s.DosageMg}{s.DosageUnit}"
+                Text = $"{s.Name} {s.DosageMg} {s.DosageUnit}"
             });
         }
 
