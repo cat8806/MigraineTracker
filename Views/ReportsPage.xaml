@@ -1,9 +1,30 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MigraineTracker.Views.ReportsPage"
-             Title="Reports">
-    <StackLayout>
-        <Label Text="Reports Page" HorizontalOptions="Center" VerticalOptions="Center"/>
-    </StackLayout>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:MigraineTracker.ViewModels"
+    x:Class="MigraineTracker.Views.ReportsPage"
+    x:Name="ReportsRoot"
+    Title="Reports">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Share" Clicked="OnShareClicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.BindingContext>
+        <vm:ReportsPageViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="10" Spacing="10">
+        <DatePicker Date="{Binding SelectedDate}" />
+        <CollectionView ItemsSource="{Binding Items}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="60,30,*" Padding="5">
+                        <Label Text="{Binding Time, StringFormat='{0:HH:mm}'}" />
+                        <Label Grid.Column="1" Text="{Binding Icon}" FontSize="18" HorizontalOptions="Center" />
+                        <Label Grid.Column="2" Text="{Binding Text}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
 </ContentPage>
