@@ -12,3 +12,4 @@ A lightweight .NET MAUI app for logging migraine episodes and daily factors.
 ```bash
 dotnet build MigraineTracker.sln     # compile
 dotnet run -t:Run                    # launch for current target
+```
