@@ -14,7 +14,7 @@ namespace MigraineTracker.Views
             TimePicker.Time = DateTime.Now.TimeOfDay;
         }
 
-        // Quick-add buttons (250/500/1000 mL)
+        // Quick-add buttons (350/700/1000 mL)
         private async void OnQuickAddClicked(object sender, EventArgs e)
         {
             if (!(sender is Button btn) ||
