@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MigraineTracker.Views.AddSupplementPage"
+    xmlns:viewmodels="clr-namespace:MigraineTracker.ViewModels"
+    x:Name="ThisPage"
+    Title="Add Supplements">
+
+    <ContentPage.BindingContext>
+        <viewmodels:AddSupplementViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="12">
+
+            <!-- Recent batches -->
+            <Label Text="Pick from Recent Batches" FontAttributes="Bold"/>
+            <CollectionView ItemsSource="{Binding RecentBatches}" SelectionMode="None">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Margin="0,4" BorderColor="#e0e0e0" CornerRadius="8">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding BatchDate, StringFormat='{0:yyyy-MM-dd}'}" FontAttributes="Bold"/>
+                                <Label Text="{Binding BatchDescription}" FontSize="13"/>
+                                <Button 
+                                    Text="Use this batch"
+                                    Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.UseBatchCommand}"
+                                    CommandParameter="{Binding .}"/>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Current supplements being added -->
+            <Label Text="Supplements to Add" FontAttributes="Bold" Margin="0,16,0,0"/>
+            <CollectionView ItemsSource="{Binding SupplementDrafts}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="#e0e0e0" CornerRadius="8">
+                            <VerticalStackLayout>
+                                <Entry Placeholder="Name" Text="{Binding Name, Mode=TwoWay}" />
+                                <Entry Placeholder="Dosage" Keyboard="Numeric" Text="{Binding DosageMg, Mode=TwoWay}" />
+                                <Entry Placeholder="Unit" Text="{Binding DosageUnit, Mode=TwoWay}" />
+                                <TimePicker Time="{Binding TimeTaken, Mode=TwoWay}" />
+                                <Editor Placeholder="Notes" Text="{Binding Notes, Mode=TwoWay}" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Button Text="+ Add Another" Command="{Binding AddSupplementRowCommand}" />
+            <Button Text="Save All" Command="{Binding SaveAllSupplementsCommand}" BackgroundColor="#4CAF50" TextColor="White"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

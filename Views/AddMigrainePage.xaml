@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MigraineTracker.Views.AddMigrainePage"
+             Title="Add Migraine">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="18">
+
+            <Label Text="New Migraine Entry" FontSize="22" FontAttributes="Bold"/>
+
+            <Label Text="Date"/>
+            <DatePicker x:Name="DatePicker" />
+
+            <Label Text="Start Time"/>
+            <TimePicker x:Name="StartTimePicker" />
+
+            <Label Text="End Time"/>
+            <TimePicker x:Name="EndTimePicker" />
+
+            <Label Text="Severity (1-5)"/>
+            <Slider x:Name="SeveritySlider" Minimum="1" Maximum="5" Value="3" />
+
+            <Label Text="Triggers"/>
+            <Entry x:Name="TriggersEntry" Placeholder="e.g. Stress, Lack of sleep"/>
+
+            <Label Text="Notes"/>
+            <Editor x:Name="NotesEditor" HeightRequest="80" Placeholder="Additional details"/>
+
+            <Button Text="Save" Clicked="OnSaveClicked" BackgroundColor="#4CAF50" TextColor="White"/>
+            <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="#F44336" TextColor="White"/>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
