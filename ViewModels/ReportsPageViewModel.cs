@@ -27,7 +27,7 @@ public partial class ReportsPageViewModel : ObservableObject
         {
             if (SetProperty(ref _selectedDate, value))
             {
-                LoadData();
+                LoadDataAsync();
             }
         }
     }
