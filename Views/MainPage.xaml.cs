@@ -1,6 +1,5 @@
 ﻿using MigraineTracker.ViewModels;
-using MigraineTracker.Views;
-namespace MigraineTracker
+namespace MigraineTracker.Views
 {
     public partial class MainPage : ContentPage
     {
