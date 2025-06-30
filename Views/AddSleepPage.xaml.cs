@@ -24,6 +24,12 @@ namespace MigraineTracker.Views
             var start = StartDatePicker.Date + StartTimePicker.Time;
             var end = EndDatePicker.Date + EndTimePicker.Time;
 
+            if (end <= start)
+            {
+                await DisplayAlert("Error", "End time must be after start time.", "OK");
+                return;
+            }
+
             var entry = new SleepEntry
             {
                 Id = Guid.NewGuid(),
