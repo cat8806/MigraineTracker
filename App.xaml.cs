@@ -7,6 +7,10 @@ namespace MigraineTracker
         {
             InitializeComponent();
 
+            // Force the application to always use the light theme
+            // regardless of the device's system setting.
+            App.Current.UserAppTheme = AppTheme.Light;
+
             using (var db = new MigraineTrackerDbContext())
             {
                 db.Database.EnsureCreated();
