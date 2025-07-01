@@ -15,11 +15,10 @@ namespace MigraineTracker.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
-            await vm.LoadLatestMigraineAsync();  // Refresh when page comes back into view
-            await vm.LoadTodaySupplementsAsync();
-            await vm.LoadTodayMealsAsync();
-            await vm.LoadTodayWaterAsync();
-            await vm.LoadLatestSleepAsync();
+            if (!vm.IsLoaded)
+            {
+                await vm.LoadDashboardAsync();
+            }
         }
         private async void OnAddMigraineClicked(object sender, EventArgs e)
         {

@@ -14,6 +14,8 @@ namespace MigraineTracker.ViewModels
         private string _migraineSeverity = "";
         private string _migraineTriggers = "";
 
+        private bool _loaded;
+
         private string _supplementList = "";
         private string _todayMeals = "";
         private string _waterProgress = "";
@@ -62,12 +64,14 @@ namespace MigraineTracker.ViewModels
             set { _sleepSummary = value; OnPropertyChanged(); }
         }
 
+        public bool IsLoaded => _loaded;
+
         public MainPageViewModel()
         {
-            _ = LoadLatestMigraineAsync();
+            _ = LoadDashboardAsync();
         }
 
-        public async Task LoadLatestMigraineAsync()
+        public async Task<(string Episode, string Severity, string Triggers)> LoadLatestMigraineAsync()
         {
             using (var db = new MigraineTrackerDbContext())
             {
@@ -78,19 +82,18 @@ namespace MigraineTracker.ViewModels
 
                 if (latest != null)
                 {
-                    LastMigraineEpisode = latest.Date.ToString("yyyy-MM-dd");
-                    MigraineSeverity = $"Severity: {latest.Severity}";
-                    MigraineTriggers = $"Triggers: {latest.Triggers}";
+                    return (
+                        latest.Date.ToString("yyyy-MM-dd"),
+                        $"Severity: {latest.Severity}",
+                        $"Triggers: {latest.Triggers}");
                 }
                 else
                 {
-                    LastMigraineEpisode = "No entry yet";
-                    MigraineSeverity = "—";
-                    MigraineTriggers = "—";
+                    return ("No entry yet", "—", "—");
                 }
             }
         }
-        public async Task LoadTodaySupplementsAsync()
+        public async Task<string> LoadTodaySupplementsAsync()
         {
             using (var db = new MigraineTrackerDbContext())
             {
@@ -110,10 +113,10 @@ namespace MigraineTracker.ViewModels
                     .Select(r => $"{r.Name} {r.TotalDosage} {r.DosageUnit}")
                     .ToList();
 
-                SupplementList = string.Join("   • ", list);
+                return string.Join("   • ", list);
             }
         }
-        public async Task LoadTodayMealsAsync()
+        public async Task<string> LoadTodayMealsAsync()
         {
             using var db = new MigraineTrackerDbContext();
             var list = await db.Meals
@@ -124,12 +127,12 @@ namespace MigraineTracker.ViewModels
                     (m.ContainsTrigger ? $" ({m.TriggerNotes})" : ""))
                 .ToListAsync();
 
-            TodayMeals = list.Any()
+            return list.Any()
                 ? string.Join("\n", list)
                 : "No meals logged yet.";
         }
 
-        public async Task LoadTodayWaterAsync()
+        public async Task<string> LoadTodayWaterAsync()
         {
             using var db = new MigraineTrackerDbContext();
             var total = await db.WaterIntakes
@@ -137,9 +140,9 @@ namespace MigraineTracker.ViewModels
                           .SumAsync(w => (int?)w.VolumeMl) ?? 0;
 
             const int dailyGoal = 2500;  // you can make this configurable
-            WaterProgress = $"{total} mL / {dailyGoal} mL";
+            return $"{total} mL / {dailyGoal} mL";
         }
-        public async Task LoadLatestSleepAsync()
+        public async Task<string> LoadLatestSleepAsync()
         {
             using var db = new MigraineTrackerDbContext();
             var latest = await db.Sleeps
@@ -150,15 +153,44 @@ namespace MigraineTracker.ViewModels
             if (latest != null && latest.SleepStart.HasValue && latest.SleepEnd.HasValue)
             {
                 var duration = (latest.SleepEnd.Value - latest.SleepStart.Value).TotalHours;
-                SleepSummary =
+                return
                     $"{duration:F1} hr {latest.Quality}\n" +
                     $"{latest.SleepStart:hh:mm tt} – {latest.SleepEnd:hh:mm tt}\n" +
                     $"{latest.Notes}";
             }
             else
             {
-                SleepSummary = "No sleep logged yet.";
+                return "No sleep logged yet.";
             }
+        }
+
+        public async Task LoadDashboardAsync()
+        {
+            var migraineTask = LoadLatestMigraineAsync();
+            var supplementsTask = LoadTodaySupplementsAsync();
+            var mealsTask = LoadTodayMealsAsync();
+            var waterTask = LoadTodayWaterAsync();
+            var sleepTask = LoadLatestSleepAsync();
+
+            await Task.WhenAll(migraineTask, supplementsTask, mealsTask, waterTask, sleepTask);
+
+            var migraineInfo = migraineTask.Result;
+            LastMigraineEpisode = migraineInfo.Episode;
+            MigraineSeverity = migraineInfo.Severity;
+            MigraineTriggers = migraineInfo.Triggers;
+
+            SupplementList = supplementsTask.Result;
+            TodayMeals = mealsTask.Result;
+            WaterProgress = waterTask.Result;
+            SleepSummary = sleepTask.Result;
+
+            _loaded = true;
+        }
+
+        public Task ForceRefreshAsync()
+        {
+            _loaded = false;
+            return LoadDashboardAsync();
         }
         // Boilerplate for INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
