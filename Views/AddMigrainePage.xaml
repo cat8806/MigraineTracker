@@ -18,8 +18,8 @@
             <Label Text="End Time"/>
             <TimePicker x:Name="EndTimePicker" />
 
-            <Label Text="Severity (1-5)"/>
-            <Slider x:Name="SeveritySlider" Minimum="1" Maximum="5" Value="3" />
+            <Label Text="Severity (1-10)"/>
+            <Slider x:Name="SeveritySlider" Minimum="1" Maximum="10" Value="5" />
 
             <Label Text="Triggers"/>
             <Entry x:Name="TriggersEntry" Placeholder="e.g. Stress, Lack of sleep"/>

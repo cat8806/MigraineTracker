@@ -59,7 +59,7 @@ public partial class ReportsPageViewModel : ObservableObject
             {
                 Time = time,
                 Icon = "\uD83D\uDCA5", // 💥
-                Text = $"Migraine {m.Severity}/5 {m.Triggers}"
+                Text = $"Migraine {m.Severity}/10 {m.Triggers}"
             });
         }
 
