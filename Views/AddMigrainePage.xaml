@@ -26,31 +26,7 @@
                     ValueChanged="SeveritySlider_ValueChanged" />
             <Label x:Name="SeverityValueLabel"
                    HorizontalOptions="Center"
-                   Text="{Binding Source={x:Reference SeveritySlider}, Path=Value, StringFormat='Selected: {0:F0}'}" />
-            <Grid ColumnSpacing="0" Margin="0,0,0,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label Text="1" Grid.Column="0" HorizontalOptions="Center" />
-                <Label Text="2" Grid.Column="1" HorizontalOptions="Center" />
-                <Label Text="3" Grid.Column="2" HorizontalOptions="Center" />
-                <Label Text="4" Grid.Column="3" HorizontalOptions="Center" />
-                <Label Text="5" Grid.Column="4" HorizontalOptions="Center" />
-                <Label Text="6" Grid.Column="5" HorizontalOptions="Center" />
-                <Label Text="7" Grid.Column="6" HorizontalOptions="Center" />
-                <Label Text="8" Grid.Column="7" HorizontalOptions="Center" />
-                <Label Text="9" Grid.Column="8" HorizontalOptions="Center" />
-                <Label Text="10" Grid.Column="9" HorizontalOptions="Center" />
-            </Grid>
+                   Text="{Binding Source={x:Reference SeveritySlider}, Path=Value, StringFormat='{0:F0}'}" />
 
             <Label Text="Triggers"/>
             <Entry x:Name="TriggersEntry" Placeholder="e.g. Stress, Lack of sleep"/>
