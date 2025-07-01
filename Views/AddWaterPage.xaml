@@ -24,13 +24,13 @@
         <Label Text="Time" />
         <TimePicker x:Name="TimePicker" />
 
-        <Button Text="Save" 
-            BackgroundColor="#4CAF50" 
-            TextColor="White" 
+        <Button Text="Save"
+            BackgroundColor="#5D3EE4" 
+			TextColor="White"
             Clicked="OnSaveClicked"/>
-        <Button Text="Cancel" 
-            BackgroundColor="#F44336" 
-            TextColor="White" 
+        <Button Text="Cancel"
+            BackgroundColor="#F1F0F4" 
+			TextColor="Black"
             Clicked="OnCancelClicked"/>
 
     </VerticalStackLayout>

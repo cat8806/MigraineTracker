@@ -34,8 +34,8 @@
             <Label Text="Notes"/>
             <Editor x:Name="NotesEditor" HeightRequest="80" Placeholder="Additional details"/>
 
-            <Button Text="Save" Clicked="OnSaveClicked" BackgroundColor="#4CAF50" TextColor="White"/>
-            <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="#F44336" TextColor="White"/>
+            <Button Text="Save" Clicked="OnSaveClicked" BackgroundColor="#5D3EE4" TextColor="White"/>
+            <Button Text="Cancel" Clicked="OnCancelClicked" BackgroundColor="#F1F0F4" TextColor="Black"/>
 
         </VerticalStackLayout>
     </ScrollView>
