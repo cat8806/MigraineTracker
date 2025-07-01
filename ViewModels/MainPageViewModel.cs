@@ -84,7 +84,7 @@ namespace MigraineTracker.ViewModels
                 }
                 else
                 {
-                    LastMigraineEpisode = "No entry yet";
+                    LastMigraineEpisode = "No migraine logged yet.";
                     MigraineSeverity = "";
                     MigraineTriggers = "";
                 }

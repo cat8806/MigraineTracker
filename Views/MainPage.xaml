@@ -82,7 +82,7 @@
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
-                               Text="Food and Drink Log"/>
+                               Text="Food and Drink"/>
 
                         <Label Style="{StaticResource CardBody}"
                                Text="{Binding TodayMeals}"
@@ -111,7 +111,7 @@
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
-                               Text="Sleep Log"/>
+                               Text="Sleep"/>
 
                         <Label Style="{StaticResource CardBody}"
                                Text="{Binding SleepSummary}"
