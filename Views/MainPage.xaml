@@ -33,6 +33,9 @@
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
+                               Text="Last Migraine Episode"/>
+                        
+                        <Label Style="{StaticResource CardBody}"
                                Text="{Binding LastMigraineEpisode}"/>
 
                         <Label Style="{StaticResource CardBody}"
@@ -94,7 +97,8 @@
                                 Clicked="OnAddMealClicked"/>
                         <Button Style="{StaticResource CardButton}"
                                 Text="+ Add Water"
-                                Clicked="OnAddWaterClicked"/>
+                                Clicked="OnAddWaterClicked"
+                                Margin="0,8,0,0" />
                     </StackLayout>
                 </VerticalStackLayout>
             </Frame>
