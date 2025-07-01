@@ -39,13 +39,13 @@ namespace MigraineTracker.ViewModels
         }
     }
 
-    public partial class LogsPageViewModel : ObservableObject
+    public partial class TimelinePageViewModel : ObservableObject
     {
         public ObservableCollection<LogGroup> LogGroups { get; } = new();
 
         public IRelayCommand<LogItem> DeleteCommand { get; }
 
-        public LogsPageViewModel()
+        public TimelinePageViewModel()
         {
             DeleteCommand = new RelayCommand<LogItem>(DeleteItem);
         }

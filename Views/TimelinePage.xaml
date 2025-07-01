@@ -3,11 +3,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:MigraineTracker.ViewModels"
-    x:Class="MigraineTracker.Views.LogsPage"
-    x:Name="LogsPageRoot"
-    Title="Logs">
+    x:Class="MigraineTracker.Views.TimelinePage"
+    x:Name="TimelinePageRoot"
+    Title="Timeline">
     <ContentPage.BindingContext>
-        <vm:LogsPageViewModel />
+        <vm:TimelinePageViewModel />
     </ContentPage.BindingContext>
 
     <CollectionView ItemsSource="{Binding LogGroups}" IsGrouped="True">
@@ -26,7 +26,7 @@
                         <SwipeItems>
                             <SwipeItem Text="Delete"
                                        BackgroundColor="Red"
-                                       Command="{Binding BindingContext.DeleteCommand, Source={x:Reference LogsPageRoot}}"
+                                       Command="{Binding BindingContext.DeleteCommand, Source={x:Reference TimelinePageRoot}}"
                                        CommandParameter="{Binding .}" />
                         </SwipeItems>
                     </SwipeView.RightItems>
