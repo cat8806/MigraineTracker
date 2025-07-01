@@ -14,15 +14,15 @@
     </ContentPage.BindingContext>
 
     <VerticalStackLayout Padding="10" Spacing="10">
-        <HorizontalStackLayout>
-            <VerticalStackLayout Spacing="2">
-                <Label Text="Start" FontAttributes="Bold" />
+        <HorizontalStackLayout Spacing="20">
+            <HorizontalStackLayout Spacing="6">
+                <Label Text="Start" FontAttributes="Bold" VerticalOptions="Center" />
                 <DatePicker Date="{Binding StartDate}" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="2" Margin="20,0,0,0">
-                <Label Text="End" FontAttributes="Bold" />
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Spacing="6">
+                <Label Text="End" FontAttributes="Bold" VerticalOptions="Center" />
                 <DatePicker Date="{Binding EndDate}" />
-            </VerticalStackLayout>
+            </HorizontalStackLayout>
         </HorizontalStackLayout>
         <CollectionView ItemsSource="{Binding Items}">
             <CollectionView.ItemTemplate>
