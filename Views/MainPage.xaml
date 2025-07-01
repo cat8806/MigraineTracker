@@ -27,7 +27,7 @@
             <!-- ===== Migraine Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <Image Source="migraine_illustration.jpg"
+                    <Image Source="migraine_illustration.png"
                            Aspect="AspectFill"
                            HeightRequest="160"/>
 
@@ -51,7 +51,7 @@
             <!-- ===== Supplements Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <Image Source="supplements_illustration.jpg"
+                    <Image Source="supplements_illustration.png"
                            Aspect="AspectFill"
                            HeightRequest="160"/>
 
@@ -73,7 +73,7 @@
             <!-- ===== Food & Drink Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <Image Source="food_drink_illustration.jpg"
+                    <Image Source="food_drink_illustration.png"
                            Aspect="AspectFill"
                            HeightRequest="160"/>
 
@@ -101,7 +101,7 @@
             <!-- ===== Sleep Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <Image Source="sleep_illustration.jpg"
+                    <Image Source="sleep_illustration.png"
                            Aspect="AspectFill"
                            HeightRequest="160"/>
 
