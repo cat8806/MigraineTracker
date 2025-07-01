@@ -1,6 +1,7 @@
 ﻿using System;
 using MigraineTracker.Data;
 using MigraineTracker.Models;
+using Microsoft.Maui.Controls;
 
 
 namespace MigraineTracker.Views
@@ -43,6 +44,17 @@ namespace MigraineTracker.Views
         private async void OnCancelClicked(object sender, EventArgs e)
         {
             await Navigation.PopAsync();
+        }
+
+        private void SeveritySlider_ValueChanged(object sender, ValueChangedEventArgs e)
+        {
+            int rounded = (int)Math.Round(e.NewValue);
+
+            if (rounded != (int)e.NewValue)
+            {
+                SeveritySlider.Value = rounded;
+                return;
+            }
         }
     }
 }
