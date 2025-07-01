@@ -80,7 +80,10 @@ namespace MigraineTracker.ViewModels
                 {
                     LastMigraineEpisode = latest.Date.ToString("yyyy-MM-dd");
                     MigraineSeverity = $"Severity: {latest.Severity}";
-                    MigraineTriggers = $"Triggers: {latest.Triggers}";
+                    if (!string.IsNullOrEmpty(latest.Triggers))
+                    {
+                        MigraineTriggers = $"Triggers: {latest.Triggers}";
+                    }
                 }
                 else
                 {
