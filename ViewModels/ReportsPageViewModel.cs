@@ -17,16 +17,34 @@ public class ReportItem
     public string Text { get; set; } = string.Empty;
 }
 
+
 public partial class ReportsPageViewModel : ObservableObject
 {
-    private DateTime _selectedDate = DateTime.Today;
-    public DateTime SelectedDate
+    private DateTime _startDate = DateTime.Today;
+    public DateTime StartDate
     {
-        get => _selectedDate;
+        get => _startDate;
         set
         {
-            if (SetProperty(ref _selectedDate, value))
+            if (SetProperty(ref _startDate, value))
             {
+                if (EndDate < _startDate)
+                    EndDate = _startDate;
+                LoadDataAsync();
+            }
+        }
+    }
+
+    private DateTime _endDate = DateTime.Today;
+    public DateTime EndDate
+    {
+        get => _endDate;
+        set
+        {
+            if (SetProperty(ref _endDate, value))
+            {
+                if (_endDate < StartDate)
+                    StartDate = _endDate;
                 LoadDataAsync();
             }
         }
@@ -38,64 +56,65 @@ public partial class ReportsPageViewModel : ObservableObject
     {
         Items.Clear();
         var list = new List<ReportItem>();
-        var date = SelectedDate.Date;
         using var db = new MigraineTrackerDbContext();
 
-        foreach (var s in await db.Sleeps.Where(s => s.Date == date).ToListAsync())
+        for (var date = StartDate.Date; date <= EndDate.Date; date = date.AddDays(1))
         {
-            var time = s.SleepStart ?? date;
-            list.Add(new ReportItem
+            foreach (var s in await db.Sleeps.Where(s => s.Date == date).ToListAsync())
             {
-                Time = time,
-                Icon = "\uD83D\uDE34", // 😴
-                Text = $"Sleep {s.DurationHours:F1}h {s.Quality}"
-            });
-        }
+                var time = s.SleepStart ?? date;
+                list.Add(new ReportItem
+                {
+                    Time = time,
+                    Icon = "\uD83D\uDE34", // 😴
+                    Text = $"Sleep {s.DurationHours:F1}h {s.Quality}"
+                });
+            }
 
-        foreach (var m in await db.Migraines.Where(m => m.Date == date).ToListAsync())
-        {
-            var time = m.StartTime ?? date;
-            list.Add(new ReportItem
+            foreach (var m in await db.Migraines.Where(m => m.Date == date).ToListAsync())
             {
-                Time = time,
-                Icon = "\uD83D\uDCA5", // 💥
-                Text = $"Migraine {m.Severity}/10 {m.Triggers}"
-            });
-        }
+                var time = m.StartTime ?? date;
+                list.Add(new ReportItem
+                {
+                    Time = time,
+                    Icon = "\uD83D\uDCA5", // 💥
+                    Text = $"Migraine {m.Severity}/10 {m.Triggers}"
+                });
+            }
 
-        foreach (var meal in await db.Meals.Where(meal => meal.Date == date).ToListAsync())
-        {
-            var time = meal.Time ?? date;
-            list.Add(new ReportItem
+            foreach (var meal in await db.Meals.Where(meal => meal.Date == date).ToListAsync())
             {
-                Time = time,
-                Icon = "\uD83C\uDF7D", // 🍽
-                Text = $"{meal.MealType}: {meal.FoodItems}"
-            });
-        }
+                var time = meal.Time ?? date;
+                list.Add(new ReportItem
+                {
+                    Time = time,
+                    Icon = "\uD83C\uDF7D", // 🍽
+                    Text = $"{meal.MealType}: {meal.FoodItems}"
+                });
+            }
 
-        foreach (var s in await db.Supplements.Where(s => s.Date == date).ToListAsync())
-        {
-            var time = s.TimeTaken ?? date;
-            list.Add(new ReportItem
+            foreach (var s in await db.Supplements.Where(s => s.Date == date).ToListAsync())
             {
-                Time = time,
-                Icon = "\uD83D\uDC8A", // 💊
-                Text = $"{s.Name} {s.DosageMg} {s.DosageUnit}"
-            });
-        }
+                var time = s.TimeTaken ?? date;
+                list.Add(new ReportItem
+                {
+                    Time = time,
+                    Icon = "\uD83D\uDC8A", // 💊
+                    Text = $"{s.Name} {s.DosageMg} {s.DosageUnit}"
+                });
+            }
 
-        foreach (var w in await db.WaterIntakes.Where(w => w.Date == date).ToListAsync())
-        {
-            var time = w.Time ?? date;
-            list.Add(new ReportItem
+            foreach (var w in await db.WaterIntakes.Where(w => w.Date == date).ToListAsync())
             {
-                Time = time,
-                Icon = "\uD83D\uDCA7", // 💧
-                Text = $"Water {w.VolumeMl} mL"
-            });
+                var time = w.Time ?? date;
+                list.Add(new ReportItem
+                {
+                    Time = time,
+                    Icon = "\uD83D\uDCA7", // 💧
+                    Text = $"Water {w.VolumeMl} mL"
+                });
+            }
         }
-
         foreach (var item in list.OrderBy(i => i.Time))
             Items.Add(item);
     }
@@ -103,10 +122,14 @@ public partial class ReportsPageViewModel : ObservableObject
     public string BuildMarkdown()
     {
         var sb = new StringBuilder();
-        sb.AppendLine($"# Diary for {SelectedDate:yyyy-MM-dd}");
-        foreach (var item in Items.OrderBy(i => i.Time))
+        for (var date = StartDate.Date; date <= EndDate.Date; date = date.AddDays(1))
         {
-            sb.AppendLine($"{item.Time:HH:mm} {item.Icon} {item.Text}");
+            sb.AppendLine($"# Diary for {date:yyyy-MM-dd}");
+            foreach (var item in Items.Where(i => i.Time.Date == date).OrderBy(i => i.Time))
+            {
+                sb.AppendLine($"{item.Time:HH:mm} {item.Icon} {item.Text}");
+            }
+            sb.AppendLine();
         }
         return sb.ToString();
     }
