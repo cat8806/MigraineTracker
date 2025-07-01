@@ -27,7 +27,11 @@ namespace MigraineTracker.ViewModels
         public AddSupplementViewModel()
         {
             // Start with one row by default
-            SupplementDrafts.Add(new SupplementEntryDraft());
+            // Start with one row by default, using the current time
+            SupplementDrafts.Add(new SupplementEntryDraft
+            {
+                TimeTaken = DateTime.Now.TimeOfDay
+            });
         }
 
         [RelayCommand]
