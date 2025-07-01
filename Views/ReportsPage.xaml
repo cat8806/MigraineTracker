@@ -14,7 +14,16 @@
     </ContentPage.BindingContext>
 
     <VerticalStackLayout Padding="10" Spacing="10">
-        <DatePicker Date="{Binding SelectedDate}" />
+        <HorizontalStackLayout>
+            <VerticalStackLayout Spacing="2">
+                <Label Text="Start" FontAttributes="Bold" />
+                <DatePicker Date="{Binding StartDate}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="2" Margin="20,0,0,0">
+                <Label Text="End" FontAttributes="Bold" />
+                <DatePicker Date="{Binding EndDate}" />
+            </VerticalStackLayout>
+        </HorizontalStackLayout>
         <CollectionView ItemsSource="{Binding Items}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
