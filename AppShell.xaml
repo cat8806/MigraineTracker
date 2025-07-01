@@ -16,9 +16,9 @@
             Icon="ic_home.png"
             ContentTemplate="{DataTemplate views:MainPage}" />
         <ShellContent
-            Title="Logs"
+            Title="Timeline"
             Icon="ic_list.png"
-            ContentTemplate="{DataTemplate views:LogsPage}" />
+            ContentTemplate="{DataTemplate views:TimelinePage}" />
         <ShellContent
             Title="Reports"
             Icon="ic_chart.png"

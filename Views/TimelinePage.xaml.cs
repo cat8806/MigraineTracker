@@ -3,14 +3,14 @@ using MigraineTracker.ViewModels;
 
 namespace MigraineTracker.Views;
 
-public partial class LogsPage : ContentPage
+public partial class TimelinePage : ContentPage
 {
-    private readonly LogsPageViewModel vm;
+    private readonly TimelinePageViewModel vm;
 
-    public LogsPage()
+    public TimelinePage()
     {
         InitializeComponent();
-        vm = BindingContext as LogsPageViewModel ?? new LogsPageViewModel();
+        vm = BindingContext as TimelinePageViewModel ?? new TimelinePageViewModel();
         BindingContext = vm;
     }
 
