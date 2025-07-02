@@ -79,7 +79,7 @@ namespace MigraineTracker.ViewModels
                     ItemType = LogItemType.Supplement,
                     Timestamp = time,
                     Icon = "\uD83D\uDC8A",
-                    PrimaryText = $"{s.Name} {s.DosageMg} {s.DosageUnit}",
+                    PrimaryText = $"{s.Name} {s.DosageUnit} * {s.DosageMg}",
                     SubText = $"{time:hh:mm tt}"
                 });
             }

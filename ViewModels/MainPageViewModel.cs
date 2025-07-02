@@ -110,10 +110,10 @@ namespace MigraineTracker.ViewModels
                     .ToListAsync();
 
                 var list = todaySupps
-                    .Select(r => $"{r.Name} {r.TotalDosage} {r.DosageUnit}")
+                    .Select(r => $"{r.Name} {r.DosageUnit} * {r.TotalDosage} ")
                     .ToList();
 
-                SupplementList = string.Join("   • ", list);
+                SupplementList = string.Join(" • ", list);
             }
         }
         public async Task LoadTodayMealsAsync()
