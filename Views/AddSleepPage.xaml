@@ -8,8 +8,6 @@
   <ScrollView>
     <VerticalStackLayout Padding="20" Spacing="16">
 
-      <Label Text="New Sleep Entry" FontSize="22" FontAttributes="Bold"/>
-
       <!-- Start Date + Time -->
       <Label Text="Sleep Start Date" />
       <DatePicker x:Name="StartDatePicker" />

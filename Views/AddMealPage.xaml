@@ -9,8 +9,6 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
 
-            <Label Text="New Meal Entry" FontSize="22" FontAttributes="Bold"/>
-
             <!-- Meal Type -->
             <Label Text="Meal Type"/>
             <Picker x:Name="MealTypePicker">
