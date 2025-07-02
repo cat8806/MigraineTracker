@@ -25,7 +25,6 @@ namespace MigraineTracker.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Add any custom table configuration here, if needed
         }
     }
 }
