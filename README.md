@@ -1,6 +1,8 @@
 # MigraineTracker
 
 A lightweight .NET MAUI app for logging migraine episodes and daily factors.
+<img width="473" alt="image" src="https://github.com/user-attachments/assets/d7bbb38a-bb07-44a6-ae8f-8dc2e68dbc96" />
+
 
 ## Features
 - Add migraine episodes (start/end, severity, triggers, notes)
