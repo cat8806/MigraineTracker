@@ -13,7 +13,12 @@
         <vm:ReportsPageViewModel />
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout Padding="10" Spacing="10">
+    <Grid Padding="10" RowSpacing="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
         <HorizontalStackLayout Spacing="20">
             <HorizontalStackLayout Spacing="6">
                 <Label Text="Start" FontAttributes="Bold" VerticalOptions="Center" />
@@ -24,7 +29,8 @@
                 <DatePicker Date="{Binding EndDate}" />
             </HorizontalStackLayout>
         </HorizontalStackLayout>
-        <CollectionView ItemsSource="{Binding Items}">
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Items}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid ColumnDefinitions="60,30,*" Padding="5">
@@ -35,5 +41,5 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </VerticalStackLayout>
+    </Grid>
 </ContentPage>
