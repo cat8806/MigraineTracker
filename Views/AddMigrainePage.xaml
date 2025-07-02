@@ -7,8 +7,6 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="18">
 
-            <Label Text="New Migraine Entry" FontSize="22" FontAttributes="Bold"/>
-
             <Label Text="Date"/>
             <DatePicker x:Name="DatePicker" />
 

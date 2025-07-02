@@ -74,11 +74,24 @@ public partial class ReportsPageViewModel : ObservableObject
             foreach (var m in await db.Migraines.Where(m => m.Date == date).ToListAsync())
             {
                 var time = m.StartTime ?? date;
+
+                var segments = new List<string>
+                {
+                    $"Migraine Severity: {m.Severity}/10"               // now explicitly labeled
+                };
+
+                if (!string.IsNullOrWhiteSpace(m.Triggers))
+                    segments.Add($"Triggers: {m.Triggers.Replace(";", ", ")}");
+
+                if (!string.IsNullOrWhiteSpace(m.Notes))
+                    segments.Add($"Note: {m.Notes}");
+
                 list.Add(new ReportItem
                 {
                     Time = time,
-                    Icon = "\uD83D\uDCA5", // 💥
-                    Text = $"Migraine {m.Severity}/10 {m.Triggers}"
+                    Icon = "\uD83D\uDCA5",   // 💥
+                    Text = string.Join(" • ", segments)
+                    // e.g. “Severity: 7/10 • Triggers: Stress, Cheese • Notes: Took medication”
                 });
             }
 
