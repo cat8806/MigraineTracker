@@ -19,7 +19,7 @@ namespace MigraineTracker.Data
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "migraine.db");
-                optionsBuilder.UseSqlite($"Filename={dbPath}");
+            optionsBuilder.UseSqlite($"Filename={dbPath}");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
