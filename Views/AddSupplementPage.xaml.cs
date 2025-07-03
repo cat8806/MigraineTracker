@@ -15,6 +15,7 @@ namespace MigraineTracker.Views
             if (BindingContext is AddSupplementViewModel vm)
             {
                 await vm.LoadRecentBatchesAsync();
+                await vm.LoadSupplementNamesAsync();
             }
         }
     }

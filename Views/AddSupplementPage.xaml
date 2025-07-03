@@ -40,7 +40,9 @@
                     <DataTemplate>
                         <Frame BorderColor="#e0e0e0" CornerRadius="8">
                             <VerticalStackLayout>
-                                <Entry Placeholder="Name" Text="{Binding Name, Mode=TwoWay}" />
+                                <AutoSuggestBox Placeholder="Name"
+                                                Text="{Binding Name, Mode=TwoWay}"
+                                                ItemsSource="{Binding Source={x:Reference ThisPage}, Path=BindingContext.SupplementNameSuggestions}" />
                                 <Entry Placeholder="Dosage" Keyboard="Numeric" Text="{Binding DosageMg, Mode=TwoWay}" />
                                 <Entry Placeholder="Unit" Text="{Binding DosageUnit, Mode=TwoWay}" />
                                 <TimePicker Time="{Binding TimeTaken, Mode=TwoWay}" />
