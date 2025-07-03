@@ -24,8 +24,6 @@ namespace MigraineTracker.ViewModels
 
         public ObservableCollection<SupplementBatchVM> RecentBatches { get; } = new();
 
-        public ObservableCollection<string> SupplementNameSuggestions { get; } = new();
-
         public AddSupplementViewModel()
         {
             // Start with one row by default
@@ -81,7 +79,6 @@ namespace MigraineTracker.ViewModels
                 }
                 await db.SaveChangesAsync();
             }
-            await LoadSupplementNamesAsync();
             SupplementDrafts.Clear();
             SupplementDrafts.Add(new SupplementEntryDraft()); // Reset to one row
             await Shell.Current.DisplayAlert("Saved", "Supplements saved!", "OK");
@@ -132,25 +129,6 @@ namespace MigraineTracker.ViewModels
                             Items = items
                         });
                     }
-                }
-            }
-        }
-
-        public async Task LoadSupplementNamesAsync()
-        {
-            SupplementNameSuggestions.Clear();
-            using (var db = new MigraineTrackerDbContext())
-            {
-                var names = await db.Supplements
-                    .Where(s => !string.IsNullOrEmpty(s.Name))
-                    .Select(s => s.Name!)
-                    .Distinct()
-                    .OrderBy(n => n)
-                    .ToListAsync();
-
-                foreach (var name in names)
-                {
-                    SupplementNameSuggestions.Add(name);
                 }
             }
         }
