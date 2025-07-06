@@ -43,7 +43,15 @@ public partial class SettingsPage : ContentPage
         if (file == null)
             return;
 
-        await BackupService.ImportBackupAsync(file.FullPath);
-        await DisplayAlert("Backup Imported", "The backup has been restored.", "OK");
+        try
+        {
+            using var stream = await file.OpenReadAsync();
+            await BackupService.ImportBackupAsync(stream);
+            await DisplayAlert("Backup Imported", "The backup has been restored.", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Import Failed", $"An error occurred while importing the backup: {ex.Message}", "OK");
+        }
     }
 }
