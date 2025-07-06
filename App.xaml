@@ -10,6 +10,12 @@
         <Color x:Key="CardBackground">White</Color>
         <Color x:Key="CardShadow">#33000000</Color>
 
+        <!-- Dashboard accent colors -->
+        <Color x:Key="MigraineColor">#F9E6E6</Color>
+        <Color x:Key="SupplementsColor">#E6F4F1</Color>
+        <Color x:Key="FoodDrinkColor">#E6F4FA</Color>
+        <Color x:Key="SleepColor">#E6EAF7</Color>
+
         <!-- Card Frame style -->
         <Style x:Key="CardFrameStyle" TargetType="Frame">
             <Setter Property="CornerRadius" Value="16"/>
