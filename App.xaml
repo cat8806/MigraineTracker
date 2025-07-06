@@ -11,10 +11,17 @@
         <Color x:Key="CardShadow">#33000000</Color>
 
         <!-- Dashboard accent colors -->
-        <Color x:Key="MigraineColor">#F9E6E6</Color>
-        <Color x:Key="SupplementsColor">#E6F4F1</Color>
-        <Color x:Key="FoodDrinkColor">#E6F4FA</Color>
-        <Color x:Key="SleepColor">#E6EAF7</Color>
+        <Color x:Key="MigraineColor">#FBE8E8</Color>
+        <Color x:Key="MigraineColorDark">#F3CFCF</Color>
+
+        <Color x:Key="SupplementsColor">#E9F7F3</Color>
+        <Color x:Key="SupplementsColorDark">#CBE6DC</Color>
+
+        <Color x:Key="FoodDrinkColor">#E8F6FF</Color>
+        <Color x:Key="FoodDrinkColorDark">#CAE8F7</Color>
+
+        <Color x:Key="SleepColor">#EEF0FF</Color>
+        <Color x:Key="SleepColorDark">#D6DBFF</Color>
 
         <!-- Card Frame style -->
         <Style x:Key="CardFrameStyle" TargetType="Frame">
