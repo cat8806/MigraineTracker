@@ -30,7 +30,16 @@
             </HorizontalStackLayout>
         </HorizontalStackLayout>
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Items}">
+        <CollectionView Grid.Row="1" ItemsSource="{Binding ReportGroups}" IsGrouped="True">
+            <CollectionView.GroupHeaderTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding Header}"
+                           FontAttributes="Bold"
+                           FontFamily="OpenSansSemibold"
+                           BackgroundColor="#EEE"
+                           Padding="10,5" />
+                </DataTemplate>
+            </CollectionView.GroupHeaderTemplate>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Grid ColumnDefinitions="60,30,*" Padding="5">
