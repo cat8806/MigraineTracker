@@ -11,6 +11,7 @@ namespace MigraineTracker.Services
         {
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "migraine.db");
             string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            Directory.CreateDirectory(documents);
             string destPath = Path.Combine(documents, $"migraine_backup_{DateTime.Now:yyyyMMdd_HHmmss}.db");
             using FileStream source = File.Open(dbPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using FileStream dest = File.Create(destPath);
