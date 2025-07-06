@@ -15,6 +15,7 @@
             <DataTemplate>
                 <Label Text="{Binding Header}"
                        FontAttributes="Bold"
+                       FontFamily="OpenSansSemibold"
                        BackgroundColor="#EEE"
                        Padding="10,5" />
             </DataTemplate>
@@ -33,7 +34,7 @@
                     <Grid Padding="10" ColumnDefinitions="30,*">
                         <Label Text="{Binding Icon}" FontSize="20" />
                         <StackLayout Grid.Column="1" Spacing="2">
-                            <Label Text="{Binding PrimaryText}" FontAttributes="Bold" />
+                            <Label Text="{Binding PrimaryText}" FontAttributes="Bold" FontFamily="OpenSansSemibold" />
                             <Label Text="{Binding SubText}" FontSize="12" TextColor="Gray" />
                         </StackLayout>
                     </Grid>
