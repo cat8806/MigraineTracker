@@ -27,8 +27,12 @@
             <!-- ===== Migraine Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <BoxView Color="{StaticResource MigraineColor}"
-                             HeightRequest="160"/>
+                    <Grid HeightRequest="160" BackgroundColor="{StaticResource MigraineColor}">
+                        <BoxView Color="{StaticResource MigraineColorDark}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="End" />
+                    </Grid>
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
@@ -53,8 +57,12 @@
             <!-- ===== Supplements Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <BoxView Color="{StaticResource SupplementsColor}"
-                             HeightRequest="160"/>
+                    <Grid HeightRequest="160" BackgroundColor="{StaticResource SupplementsColor}">
+                        <BoxView Color="{StaticResource SupplementsColorDark}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="End" />
+                    </Grid>
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
@@ -74,8 +82,12 @@
             <!-- ===== Food & Drink Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <BoxView Color="{StaticResource FoodDrinkColor}"
-                             HeightRequest="160"/>
+                    <Grid HeightRequest="160" BackgroundColor="{StaticResource FoodDrinkColor}">
+                        <BoxView Color="{StaticResource FoodDrinkColorDark}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="End" />
+                    </Grid>
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
@@ -102,8 +114,12 @@
             <!-- ===== Sleep Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <BoxView Color="{StaticResource SleepColor}"
-                             HeightRequest="160"/>
+                    <Grid HeightRequest="160" BackgroundColor="{StaticResource SleepColor}">
+                        <BoxView Color="{StaticResource SleepColorDark}"
+                                 HeightRequest="1"
+                                 HorizontalOptions="FillAndExpand"
+                                 VerticalOptions="End" />
+                    </Grid>
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
