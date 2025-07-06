@@ -58,76 +58,94 @@ public partial class ReportsPageViewModel : ObservableObject
         var list = new List<ReportItem>();
         using var db = new MigraineTrackerDbContext();
 
-        for (var date = StartDate.Date; date <= EndDate.Date; date = date.AddDays(1))
+        var sleeps = await db.Sleeps
+            .Where(s => s.Date >= StartDate && s.Date <= EndDate)
+            .ToListAsync();
+
+        foreach (var s in sleeps)
         {
-            foreach (var s in await db.Sleeps.Where(s => s.Date == date).ToListAsync())
+            var time = s.SleepStart ?? s.Date;
+            list.Add(new ReportItem
             {
-                var time = s.SleepStart ?? date;
-                list.Add(new ReportItem
-                {
-                    Time = time,
-                    Icon = "\uD83D\uDE34", // 😴
-                    Text = $"Sleep {s.DurationHours:F1}h {s.Quality}"
-                });
-            }
-
-            foreach (var m in await db.Migraines.Where(m => m.Date == date).ToListAsync())
-            {
-                var time = m.StartTime ?? date;
-
-                var segments = new List<string>
-                {
-                    $"Migraine Severity: {m.Severity}/10"               // now explicitly labeled
-                };
-
-                if (!string.IsNullOrWhiteSpace(m.Triggers))
-                    segments.Add($"Triggers: {m.Triggers.Replace(";", ", ")}");
-
-                if (!string.IsNullOrWhiteSpace(m.Notes))
-                    segments.Add($"Note: {m.Notes}");
-
-                list.Add(new ReportItem
-                {
-                    Time = time,
-                    Icon = "\uD83D\uDCA5",   // 💥
-                    Text = string.Join(" • ", segments)
-                    // e.g. “Severity: 7/10 • Triggers: Stress, Cheese • Notes: Took medication”
-                });
-            }
-
-            foreach (var meal in await db.Meals.Where(meal => meal.Date == date).ToListAsync())
-            {
-                var time = meal.Time ?? date;
-                list.Add(new ReportItem
-                {
-                    Time = time,
-                    Icon = "\uD83C\uDF7D", // 🍽
-                    Text = $"{meal.MealType}: {meal.FoodItems}"
-                });
-            }
-
-            foreach (var s in await db.Supplements.Where(s => s.Date == date).ToListAsync())
-            {
-                var time = s.TimeTaken ?? date;
-                list.Add(new ReportItem
-                {
-                    Time = time,
-                    Icon = "\uD83D\uDC8A", // 💊
-                    Text = $"{s.Name} {s.DosageUnit} * {s.DosageMg}"
-                });
-            }
-
-            foreach (var w in await db.WaterIntakes.Where(w => w.Date == date).ToListAsync())
-            {
-                var time = w.Time ?? date;
-                list.Add(new ReportItem
-                {
-                    Time = time,
-                    Icon = "\uD83D\uDCA7", // 💧
-                    Text = $"Water {w.VolumeMl} mL"
-                });
-            }
+                Time = time,
+                Icon = "\uD83D\uDE34", // 😴
+                Text = $"Sleep {s.DurationHours:F1}h {s.Quality}"
+            });
         }
+
+        var migraines = await db.Migraines
+            .Where(m => m.Date >= StartDate && m.Date <= EndDate)
+            .ToListAsync();
+
+        foreach (var m in migraines)
+        {
+            var time = m.StartTime ?? m.Date;
+
+            var segments = new List<string>
+            {
+                $"Migraine Severity: {m.Severity}/10"               // now explicitly labeled
+            };
+
+            if (!string.IsNullOrWhiteSpace(m.Triggers))
+                segments.Add($"Triggers: {m.Triggers.Replace(";", ", ")}");
+
+            if (!string.IsNullOrWhiteSpace(m.Notes))
+                segments.Add($"Note: {m.Notes}");
+
+            list.Add(new ReportItem
+            {
+                Time = time,
+                Icon = "\uD83D\uDCA5",   // 💥
+                Text = string.Join(" • ", segments)
+                // e.g. “Severity: 7/10 • Triggers: Stress, Cheese • Notes: Took medication”
+            });
+        }
+
+        var meals = await db.Meals
+            .Where(meal => meal.Date >= StartDate && meal.Date <= EndDate)
+            .ToListAsync();
+
+        foreach (var meal in meals)
+        {
+            var time = meal.Time ?? meal.Date;
+            list.Add(new ReportItem
+            {
+                Time = time,
+                Icon = "\uD83C\uDF7D", // 🍽
+                Text = $"{meal.MealType}: {meal.FoodItems}"
+            });
+        }
+
+        var supplements = await db.Supplements
+            .Where(s => s.Date >= StartDate && s.Date <= EndDate)
+            .ToListAsync();
+
+        foreach (var s in supplements)
+        {
+            var time = s.TimeTaken ?? s.Date;
+            list.Add(new ReportItem
+            {
+                Time = time,
+                Icon = "\uD83D\uDC8A", // 💊
+                Text = $"{s.Name} {s.DosageUnit} * {s.DosageMg}"
+            });
+        }
+
+        var waterIntakes = await db.WaterIntakes
+            .Where(w => w.Date >= StartDate && w.Date <= EndDate)
+            .ToListAsync();
+
+        foreach (var w in waterIntakes)
+        {
+            var time = w.Time ?? w.Date;
+            list.Add(new ReportItem
+            {
+                Time = time,
+                Icon = "\uD83D\uDCA7", // 💧
+                Text = $"Water {w.VolumeMl} mL"
+            });
+        }
+
         foreach (var item in list.OrderBy(i => i.Time))
             Items.Add(item);
     }
