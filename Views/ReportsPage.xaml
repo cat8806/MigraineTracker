@@ -21,11 +21,11 @@
 
         <HorizontalStackLayout Spacing="20">
             <HorizontalStackLayout Spacing="6">
-                <Label Text="Start" FontAttributes="Bold" VerticalOptions="Center" />
+                <Label Text="Start" FontAttributes="Bold" FontFamily="OpenSansSemibold" VerticalOptions="Center" />
                 <DatePicker Date="{Binding StartDate}" />
             </HorizontalStackLayout>
             <HorizontalStackLayout Spacing="6">
-                <Label Text="End" FontAttributes="Bold" VerticalOptions="Center" />
+                <Label Text="End" FontAttributes="Bold" FontFamily="OpenSansSemibold" VerticalOptions="Center" />
                 <DatePicker Date="{Binding EndDate}" />
             </HorizontalStackLayout>
         </HorizontalStackLayout>
