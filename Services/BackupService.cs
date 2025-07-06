@@ -49,17 +49,16 @@ namespace MigraineTracker.Services
             return destPath;
         }
 
-        public static async Task ImportBackupAsync(string sourcePath)
+        public static async Task ImportBackupAsync(Stream sourceStream)
         {
-            if (string.IsNullOrWhiteSpace(sourcePath) || !File.Exists(sourcePath))
-                throw new FileNotFoundException("Backup file not found", sourcePath);
+            if (sourceStream == null)
+                throw new ArgumentNullException(nameof(sourceStream));
 
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "migraine.db");
 
-            // Overwrite the existing database with the selected backup
-            using FileStream source = File.OpenRead(sourcePath);
+            // Overwrite the existing database with the provided stream
             using FileStream dest = File.Create(dbPath);
-            await source.CopyToAsync(dest);
+            await sourceStream.CopyToAsync(dest);
         }
     }
 }
