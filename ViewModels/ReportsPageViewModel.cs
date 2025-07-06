@@ -17,6 +17,17 @@ public class ReportItem
     public string Text { get; set; } = string.Empty;
 }
 
+public class ReportGroup : ObservableCollection<ReportItem>
+{
+    public DateTime Date { get; }
+    public string Header => Date.ToString("MMMM d yyyy");
+
+    public ReportGroup(DateTime date, IEnumerable<ReportItem> items) : base(items)
+    {
+        Date = date;
+    }
+}
+
 
 public partial class ReportsPageViewModel : ObservableObject
 {
@@ -51,6 +62,7 @@ public partial class ReportsPageViewModel : ObservableObject
     }
 
     public ObservableCollection<ReportItem> Items { get; } = new();
+    public ObservableCollection<ReportGroup> ReportGroups { get; } = new();
 
     public async Task LoadDataAsync()
     {
@@ -148,6 +160,17 @@ public partial class ReportsPageViewModel : ObservableObject
 
         foreach (var item in list.OrderBy(i => i.Time))
             Items.Add(item);
+
+        ReportGroups.Clear();
+        var grouped = Items
+            .GroupBy(i => i.Time.Date)
+            .OrderBy(g => g.Key);
+
+        foreach (var grp in grouped)
+        {
+            var groupItems = grp.OrderBy(i => i.Time);
+            ReportGroups.Add(new ReportGroup(grp.Key, groupItems));
+        }
     }
 
     public string BuildMarkdown()
