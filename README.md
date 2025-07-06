@@ -35,3 +35,7 @@ If your device’s screen size differs, simply create an Android emulator with t
 
 Android builds require the `WRITE_EXTERNAL_STORAGE` and `READ_EXTERNAL_STORAGE` permissions for the backup import/export feature.
 During export you will be prompted with Android's folder picker to choose where the backup file is saved.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
