@@ -3,8 +3,6 @@ using Microsoft.Maui.Storage;
 using System.IO;
 using System.Threading.Tasks;
 #if ANDROID
-using Android.App;
-using Android.Net;
 using AndroidX.DocumentFile.Provider;
 #endif
 
@@ -26,8 +24,8 @@ namespace MigraineTracker.Services
 #if ANDROID
             if (directory.StartsWith("content://", StringComparison.OrdinalIgnoreCase))
             {
-                Uri uri = Uri.Parse(directory);
-                var folder = DocumentFile.FromTreeUri(Application.Context, uri)
+                Android.Net.Uri uri = Android.Net.Uri.Parse(directory);
+                var folder = DocumentFile.FromTreeUri(Android.App.Application.Context, uri)
                              ?? throw new InvalidOperationException("Unable to access destination directory");
 
                 string fileName = $"migraine_backup_{DateTime.Now:yyyyMMdd_HHmmss}.db";
@@ -35,7 +33,7 @@ namespace MigraineTracker.Services
                              ?? throw new InvalidOperationException("Unable to create destination file");
 
                 using FileStream source = File.Open(dbPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-                using var destStream = Application.Context.ContentResolver.OpenOutputStream(destDoc.Uri)
+                using var destStream = Android.App.Application.Context.ContentResolver.OpenOutputStream(destDoc.Uri)
                                      ?? throw new InvalidOperationException("Unable to open destination stream");
 
                 await source.CopyToAsync(destStream);
