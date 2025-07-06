@@ -30,3 +30,7 @@ A lightweight .NET MAUI app for logging migraine episodes and daily factors.
 
 The app has been tested on a **3120 × 1440** display (e.g., *Galaxy S25 Ultra*).  
 If your device’s screen size differs, simply create an Android emulator with the same resolution in **Visual Studio 2022 → Android Device Manager** and give it a quick spin.
+
+## Permissions
+
+Android builds require the `WRITE_EXTERNAL_STORAGE` and `READ_EXTERNAL_STORAGE` permissions for the backup import/export feature.
