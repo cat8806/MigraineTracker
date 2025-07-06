@@ -15,13 +15,6 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
-
-                <Label
-                    Text="MigraineTracker"
-                    FontSize="24"
-                    FontAttributes="Bold"
-                    TextColor="#333"/>
-
             </Grid>
 
             <!-- ===== Migraine Card ===== -->
