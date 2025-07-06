@@ -27,9 +27,8 @@
             <!-- ===== Migraine Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <Image Source="migraine_illustration.png"
-                           Aspect="AspectFill"
-                           HeightRequest="160"/>
+                    <BoxView Color="{StaticResource MigraineColor}"
+                             HeightRequest="160"/>
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
@@ -54,9 +53,8 @@
             <!-- ===== Supplements Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <Image Source="supplements_illustration.png"
-                           Aspect="AspectFill"
-                           HeightRequest="160"/>
+                    <BoxView Color="{StaticResource SupplementsColor}"
+                             HeightRequest="160"/>
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
@@ -76,9 +74,8 @@
             <!-- ===== Food & Drink Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <Image Source="food_drink_illustration.png"
-                           Aspect="AspectFill"
-                           HeightRequest="160"/>
+                    <BoxView Color="{StaticResource FoodDrinkColor}"
+                             HeightRequest="160"/>
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
@@ -105,9 +102,8 @@
             <!-- ===== Sleep Card ===== -->
             <Frame Style="{StaticResource CardFrameStyle}">
                 <VerticalStackLayout>
-                    <Image Source="sleep_illustration.png"
-                           Aspect="AspectFill"
-                           HeightRequest="160"/>
+                    <BoxView Color="{StaticResource SleepColor}"
+                             HeightRequest="160"/>
 
                     <StackLayout Padding="16">
                         <Label Style="{StaticResource CardHeadline}"
