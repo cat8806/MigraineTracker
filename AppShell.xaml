@@ -23,10 +23,9 @@
             Title="Reports"
             Icon="ic_chart.png"
             ContentTemplate="{DataTemplate views:ReportsPage}" />
-        <!--Hide settings page--> 
-        <!--<ShellContent
+        <ShellContent
             Title="Settings"
             Icon="ic_settings.png"
-            ContentTemplate="{DataTemplate views:SettingsPage}" />-->
+            ContentTemplate="{DataTemplate views:SettingsPage}" />
     </TabBar>
 </Shell>
