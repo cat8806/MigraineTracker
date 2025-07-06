@@ -22,7 +22,11 @@ public partial class SettingsPage : ContentPage
             return;
         }
 
-        string path = await BackupService.ExportBackupAsync();
+        string? directory = await FolderPicker.PickFolderAsync();
+        if (string.IsNullOrEmpty(directory))
+            return;
+
+        string path = await BackupService.ExportBackupAsync(directory);
         await DisplayAlert("Backup Exported", $"Backup saved to:\n{path}", "OK");
     }
 

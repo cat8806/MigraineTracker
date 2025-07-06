@@ -9,7 +9,7 @@ A lightweight .NET MAUI app for logging migraine episodes and daily factors.
 - Log meals, water, supplements, sleep
 - View and delete entries in the **Timeline** page
 - Quick trend reports (more coming)
-- Manual export/import backups from the **Settings** tab
+- Manual export/import backups from the **Settings** tab (Android export lets you choose the destination folder)
 
 ## Project Structure
 
@@ -34,3 +34,4 @@ If your device’s screen size differs, simply create an Android emulator with t
 ## Permissions
 
 Android builds require the `WRITE_EXTERNAL_STORAGE` and `READ_EXTERNAL_STORAGE` permissions for the backup import/export feature.
+During export you will be prompted with Android's folder picker to choose where the backup file is saved.

@@ -7,12 +7,12 @@ namespace MigraineTracker.Services
 {
     public static class BackupService
     {
-        public static async Task<string> ExportBackupAsync()
+        public static async Task<string> ExportBackupAsync(string? directory = null)
         {
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "migraine.db");
-            string documents = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            Directory.CreateDirectory(documents);
-            string destPath = Path.Combine(documents, $"migraine_backup_{DateTime.Now:yyyyMMdd_HHmmss}.db");
+            directory ??= Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            Directory.CreateDirectory(directory);
+            string destPath = Path.Combine(directory, $"migraine_backup_{DateTime.Now:yyyyMMdd_HHmmss}.db");
             using FileStream source = File.Open(dbPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             using FileStream dest = File.Create(destPath);
             await source.CopyToAsync(dest);
