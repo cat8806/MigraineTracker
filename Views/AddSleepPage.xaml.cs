@@ -1,6 +1,7 @@
 ﻿using System;
 using MigraineTracker.Data;
 using MigraineTracker.Models;
+using MigraineTracker.Services;
 using Microsoft.Maui.Controls;
 
 namespace MigraineTracker.Views
@@ -46,6 +47,23 @@ namespace MigraineTracker.Views
 
             await DisplayAlert("Saved", $"Sleep saved ({(end - start).TotalHours:F1}h)", "OK");
             await Shell.Current.GoToAsync("..");
+        }
+
+        private async void OnImportClicked(object sender, EventArgs e)
+        {
+            var entry = await HealthConnectService.GetLastSleepEntryAsync();
+            if (entry == null || entry.SleepStart == null || entry.SleepEnd == null)
+            {
+                await DisplayAlert("Health Connect", "No recent sleep found.", "OK");
+                return;
+            }
+
+            StartDatePicker.Date = entry.SleepStart.Value.Date;
+            StartTimePicker.Time = entry.SleepStart.Value.TimeOfDay;
+            EndDatePicker.Date = entry.SleepEnd.Value.Date;
+            EndTimePicker.Time = entry.SleepEnd.Value.TimeOfDay;
+            NotesEditor.Text = entry.Notes ?? string.Empty;
+            QualityPicker.SelectedItem = entry.Quality ?? "Fair";
         }
 
         private async void OnCancelClicked(object sender, EventArgs e)
