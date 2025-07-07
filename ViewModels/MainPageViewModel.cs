@@ -4,7 +4,6 @@ using MigraineTracker.Data;
 using MigraineTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using MigraineTracker.Services;
 
 namespace MigraineTracker.ViewModels
 {
@@ -145,17 +144,6 @@ namespace MigraineTracker.ViewModels
         }
         public async Task LoadLatestSleepAsync()
         {
-#if ANDROID
-            var deviceSleep = await SleepDataService.GetLatestSleepAsync();
-            if (deviceSleep != null)
-            {
-                SleepSummary =
-                    $"{deviceSleep.DurationHours:F1} hr\n" +
-                    $"{deviceSleep.Start.ToLocalTime():hh:mm tt} – {deviceSleep.End.ToLocalTime():hh:mm tt}";
-                return;
-            }
-#endif
-
             using var db = new MigraineTrackerDbContext();
             var latest = await db.Sleeps
                 .OrderByDescending(s => s.Date)
