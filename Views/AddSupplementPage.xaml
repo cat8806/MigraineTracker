@@ -16,27 +16,11 @@
 
             <!-- Recent batches -->
             <Label Text="Pick from Recent Batches" FontAttributes="Bold"/>
-            <CollectionView
+            <Picker
+                Title="Select Batch"
                 ItemsSource="{Binding RecentBatches}"
-                SelectionMode="Single"
-                SelectedItem="{Binding SelectedBatch}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="16,8" BorderColor="#e0e0e0" MinimumHeightRequest="56">
-                            <VerticalStackLayout Spacing="2">
-                                <Label
-                                    Text="{Binding BatchDate, StringFormat='{0:yyyy-MM-dd}'}"
-                                    FontAttributes="Bold"
-                                    FontSize="16" />
-                                <Label
-                                    Text="{Binding BatchDescription}"
-                                    FontSize="12"
-                                    LineBreakMode="WordWrap" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                ItemDisplayBinding="{Binding DisplayText}"
+                SelectedItem="{Binding SelectedBatch}" />
 
             <!-- Current supplements being added -->
             <Label Text="Supplements to Add" FontAttributes="Bold" Margin="0,16,0,0"/>
