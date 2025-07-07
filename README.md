@@ -38,7 +38,7 @@ During export you will be prompted with Android's folder picker to choose where 
 
 ## Release Builds
 
-Android release builds enable IL trimming which can remove Entity Framework Core metadata and break the backup import. The project now keeps trimming enabled and uses a linker descriptor (`PreserveEFCore.xml`) referenced in `MigraineTracker.csproj` so that the required EF Core types are preserved.
+Android release builds enable IL trimming which can remove Entity Framework Core metadata and break the backup import. The `MigraineTracker.csproj` file disables trimming for Android release builds so that database operations work correctly and also turns off AOT compilation for that configuration.
 
 ## License
 

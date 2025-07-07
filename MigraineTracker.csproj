@@ -38,14 +38,15 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
 		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
-        <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
-    </PropertyGroup>
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
+        </PropertyGroup>
 
-    <!-- Preserve EF Core metadata when trimming -->
-    <ItemGroup>
-        <TrimmerRootDescriptor Include="PreserveEFCore.xml" />
-    </ItemGroup>
-
+        <!-- Disable IL trimming on Android release builds to preserve EF Core metadata -->
+        <PropertyGroup Condition="'$(Configuration)' == 'Release' AND '$(TargetFramework)' == 'net9.0-android'">
+            <!-- Disable trimming for Entity Framework Core metadata and turn off AOT compilation -->
+            <PublishTrimmed>false</PublishTrimmed>
+            <RunAOTCompilation>false</RunAOTCompilation>
+        </PropertyGroup>
 
 	<ItemGroup>
 		<!-- App Icon -->
