@@ -36,10 +36,6 @@ If your device’s screen size differs, simply create an Android emulator with t
 Android builds require the `WRITE_EXTERNAL_STORAGE` and `READ_EXTERNAL_STORAGE` permissions for the backup import/export feature.
 During export you will be prompted with Android's folder picker to choose where the backup file is saved.
 
-## Release Builds
-
-Android release builds enable IL trimming which can remove Entity Framework Core metadata and break the backup import. The `MigraineTracker.csproj` file disables trimming for Android release builds so that database operations work correctly.
-
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
