@@ -16,6 +16,7 @@ namespace MigraineTracker.ViewModels
         public DateTime BatchDate { get; set; }
         public List<SupplementEntry> Items { get; set; }
         public string BatchDescription => string.Join(", ", Items.Select(i => $"{i.Name} {i.DosageMg} {i.DosageUnit}"));
+        public string DisplayText => $"{BatchDate:yyyy-MM-dd}: {BatchDescription}";
     }
 
     public partial class AddSupplementViewModel : ObservableObject
@@ -23,6 +24,17 @@ namespace MigraineTracker.ViewModels
         public ObservableCollection<SupplementEntryDraft> SupplementDrafts { get; } = new();
 
         public ObservableCollection<SupplementBatchVM> RecentBatches { get; } = new();
+
+        [ObservableProperty]
+        private SupplementBatchVM? selectedBatch;
+
+        partial void OnSelectedBatchChanged(SupplementBatchVM? value)
+        {
+            if (value != null)
+            {
+                UseBatch(value);
+            }
+        }
 
         public AddSupplementViewModel()
         {
