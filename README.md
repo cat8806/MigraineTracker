@@ -10,7 +10,6 @@ A lightweight .NET MAUI app for logging migraine episodes and daily factors.
 - View and delete entries in the **Timeline** page
 - Quick trend reports (more coming)
 - Manual export/import backups from the **Settings** tab (Android export lets you choose the destination folder)
-- Import the last sleep session from **Android Health** (Android only)
 
 ## Project Structure
 

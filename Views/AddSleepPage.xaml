@@ -37,13 +37,9 @@
               Placeholder="e.g. Snoring, low O₂"/>
 
       <!-- Actions -->
-      <Button Text="Import Last Sleep"
-              BackgroundColor="#F1F0F4"
-              TextColor="Black"
-              Clicked="OnImportClicked"/>
       <Button Text="Save"
-              BackgroundColor="#5D3EE4"
-                          TextColor="White"
+              BackgroundColor="#5D3EE4" 
+			  TextColor="White"
               Clicked="OnSaveClicked"/>
       <Button Text="Cancel"
               BackgroundColor="#F1F0F4" 
