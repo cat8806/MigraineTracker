@@ -2,6 +2,7 @@ using System;
 using Microsoft.Maui.Storage;
 using System.IO;
 using System.Threading.Tasks;
+using Microsoft.Data.Sqlite;
 #if ANDROID
 using AndroidX.DocumentFile.Provider;
 #endif
@@ -55,6 +56,13 @@ namespace MigraineTracker.Services
                 throw new ArgumentNullException(nameof(sourceStream));
 
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "migraine.db");
+
+            // Ensure no DbContext instances hold the database file
+            SqliteConnection.ClearAllPools();
+
+            // Reset position in case the stream was previously read
+            if (sourceStream.CanSeek)
+                sourceStream.Position = 0;
 
             // Overwrite the existing database with the provided stream
             using FileStream dest = File.Create(dbPath);
