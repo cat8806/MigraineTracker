@@ -13,7 +13,7 @@ namespace MigraineTracker.Data
         public DbSet<MigraineEntry> Migraines { get; set; }
         public DbSet<SupplementEntry> Supplements { get; set; }
         public DbSet<MealEntry> Meals { get; set; }
-        public DbSet<WaterIntakeEntry> WaterIntakes { get; set; }
+        public DbSet<DrinkEntry> Drinks { get; set; }
         public DbSet<SleepEntry> Sleeps { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

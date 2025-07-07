@@ -18,7 +18,7 @@ namespace MigraineTracker.Views
             await vm.LoadLatestMigraineAsync();  // Refresh when page comes back into view
             await vm.LoadTodaySupplementsAsync();
             await vm.LoadTodayMealsAsync();
-            await vm.LoadTodayWaterAsync();
+            await vm.LoadTodayDrinkAsync();
             await vm.LoadLatestSleepAsync();
         }
         private async void OnAddMigraineClicked(object sender, EventArgs e)
@@ -33,9 +33,9 @@ namespace MigraineTracker.Views
         {
             await Shell.Current.GoToAsync(nameof(AddMealPage));
         }
-        private async void OnAddWaterClicked(object sender, EventArgs e)
+        private async void OnAddDrinkClicked(object sender, EventArgs e)
         {
-            await Shell.Current.GoToAsync(nameof(AddWaterPage));
+            await Shell.Current.GoToAsync(nameof(AddDrinkPage));
         }
         private async void OnAddSleepClicked(object sender, EventArgs e)
         {

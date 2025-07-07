@@ -15,7 +15,7 @@ namespace MigraineTracker.ViewModels
         Migraine,
         Supplement,
         Meal,
-        Water,
+        Drink,
         Sleep
     }
 
@@ -134,7 +134,7 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var w in await db.WaterIntakes
+            foreach (var w in await db.Drinks
                 .Where(w => w.Date >= StartDate && w.Date <= EndDate)
                 .ToListAsync())
             {
@@ -142,10 +142,10 @@ namespace MigraineTracker.ViewModels
                 items.Add(new LogItem
                 {
                     Id = w.Id,
-                    ItemType = LogItemType.Water,
+                    ItemType = LogItemType.Drink,
                     Timestamp = time,
                     Icon = "\uD83D\uDCA7",
-                    PrimaryText = $"Water {w.VolumeMl} mL",
+                    PrimaryText = $"{w.DrinkType} {w.VolumeMl} mL",
                     SubText = $"{time:hh:mm tt}"
                 });
             }
@@ -202,8 +202,8 @@ namespace MigraineTracker.ViewModels
                 case LogItemType.Meal:
                     db.Meals.Remove(new MealEntry { Id = item.Id });
                     break;
-                case LogItemType.Water:
-                    db.WaterIntakes.Remove(new WaterIntakeEntry { Id = item.Id });
+                case LogItemType.Drink:
+                    db.Drinks.Remove(new DrinkEntry { Id = item.Id });
                     break;
                 case LogItemType.Sleep:
                     db.Sleeps.Remove(new SleepEntry { Id = item.Id });

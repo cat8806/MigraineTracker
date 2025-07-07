@@ -16,7 +16,7 @@ namespace MigraineTracker.ViewModels
 
         private string _supplementList = "";
         private string _todayMeals = "";
-        private string _waterProgress = "";
+        private string _drinkProgress = "";
         private string _sleepSummary = "";
 
         // Bindable Properties
@@ -50,10 +50,10 @@ namespace MigraineTracker.ViewModels
             set { _todayMeals = value; OnPropertyChanged(); }
         }
 
-        public string WaterProgress
+        public string DrinkProgress
         {
-            get => _waterProgress;
-            set { _waterProgress = value; OnPropertyChanged(); }
+            get => _drinkProgress;
+            set { _drinkProgress = value; OnPropertyChanged(); }
         }
 
         public string SleepSummary
@@ -132,15 +132,15 @@ namespace MigraineTracker.ViewModels
                 : "No meals logged yet.";
         }
 
-        public async Task LoadTodayWaterAsync()
+        public async Task LoadTodayDrinkAsync()
         {
             using var db = new MigraineTrackerDbContext();
-            var total = await db.WaterIntakes
+            var total = await db.Drinks
                           .Where(w => w.Date == DateTime.Today)
                           .SumAsync(w => (int?)w.VolumeMl) ?? 0;
 
             const int dailyGoal = 2500;  // you can make this configurable
-            WaterProgress = $"{total} mL / {dailyGoal} mL";
+            DrinkProgress = $"{total} mL / {dailyGoal} mL";
         }
         public async Task LoadLatestSleepAsync()
         {
