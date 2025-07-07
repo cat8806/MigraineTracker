@@ -41,6 +41,36 @@ namespace MigraineTracker.ViewModels
 
     public partial class TimelinePageViewModel : ObservableObject
     {
+        private DateTime _startDate = DateTime.Today;
+        public DateTime StartDate
+        {
+            get => _startDate;
+            set
+            {
+                if (SetProperty(ref _startDate, value))
+                {
+                    if (EndDate < _startDate)
+                        EndDate = _startDate;
+                    LoadDataAsync();
+                }
+            }
+        }
+
+        private DateTime _endDate = DateTime.Today;
+        public DateTime EndDate
+        {
+            get => _endDate;
+            set
+            {
+                if (SetProperty(ref _endDate, value))
+                {
+                    if (_endDate < StartDate)
+                        StartDate = _endDate;
+                    LoadDataAsync();
+                }
+            }
+        }
+
         public ObservableCollection<LogGroup> LogGroups { get; } = new();
 
         public IRelayCommand<LogItem> DeleteCommand { get; }
@@ -56,7 +86,9 @@ namespace MigraineTracker.ViewModels
             var items = new List<LogItem>();
             using var db = new MigraineTrackerDbContext();
 
-            foreach (var m in await db.Migraines.ToListAsync())
+            foreach (var m in await db.Migraines
+                .Where(m => m.Date >= StartDate && m.Date <= EndDate)
+                .ToListAsync())
             {
                 var time = m.StartTime ?? m.Date;
                 items.Add(new LogItem
@@ -70,7 +102,9 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var s in await db.Supplements.ToListAsync())
+            foreach (var s in await db.Supplements
+                .Where(s => s.Date >= StartDate && s.Date <= EndDate)
+                .ToListAsync())
             {
                 var time = s.TimeTaken ?? s.Date;
                 items.Add(new LogItem
@@ -84,7 +118,9 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var m in await db.Meals.ToListAsync())
+            foreach (var m in await db.Meals
+                .Where(m => m.Date >= StartDate && m.Date <= EndDate)
+                .ToListAsync())
             {
                 var time = m.Time ?? m.Date;
                 items.Add(new LogItem
@@ -98,7 +134,9 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var w in await db.WaterIntakes.ToListAsync())
+            foreach (var w in await db.WaterIntakes
+                .Where(w => w.Date >= StartDate && w.Date <= EndDate)
+                .ToListAsync())
             {
                 var time = w.Time ?? w.Date;
                 items.Add(new LogItem
@@ -112,7 +150,9 @@ namespace MigraineTracker.ViewModels
                 });
             }
 
-            foreach (var s in await db.Sleeps.ToListAsync())
+            foreach (var s in await db.Sleeps
+                .Where(s => s.Date >= StartDate && s.Date <= EndDate)
+                .ToListAsync())
             {
                 var time = s.SleepStart ?? s.Date;
                 items.Add(new LogItem
