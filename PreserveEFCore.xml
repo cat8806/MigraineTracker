@@ -1,10 +1,10 @@
 <linker>
   <assembly fullname="MigraineTracker">
-    <type fullname="MigraineTracker.Data.MigraineTrackerDbContext" preserve="all"/>
-    <type fullname="MigraineTracker.Models.MigraineEntry" preserve="all"/>
-    <type fullname="MigraineTracker.Models.MealEntry" preserve="all"/>
-    <type fullname="MigraineTracker.Models.SleepEntry" preserve="all"/>
-    <type fullname="MigraineTracker.Models.SupplementEntry" preserve="all"/>
-    <type fullname="MigraineTracker.Models.WaterIntakeEntry" preserve="all"/>
+    <type fullname="MigraineTracker.Data.MigraineTrackerDbContext" />
+    <type fullname="MigraineTracker.Models.MigraineEntry" />
+    <type fullname="MigraineTracker.Models.MealEntry" />
+    <type fullname="MigraineTracker.Models.SleepEntry" />
+    <type fullname="MigraineTracker.Models.SupplementEntry" />
+    <type fullname="MigraineTracker.Models.WaterIntakeEntry" />
   </assembly>
 </linker>
