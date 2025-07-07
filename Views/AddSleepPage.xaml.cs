@@ -1,6 +1,7 @@
 ﻿using System;
 using MigraineTracker.Data;
 using MigraineTracker.Models;
+using MigraineTracker.Services;
 using Microsoft.Maui.Controls;
 
 namespace MigraineTracker.Views
@@ -17,7 +18,24 @@ namespace MigraineTracker.Views
             EndDatePicker.Date = today;
             StartTimePicker.Time = now;
             EndTimePicker.Time = now;
+#if ANDROID
+            _ = LoadFromDeviceAsync();
+#endif
         }
+
+#if ANDROID
+        private async Task LoadFromDeviceAsync()
+        {
+            var sleep = await SleepDataService.GetLatestSleepAsync();
+            if (sleep != null)
+            {
+                StartDatePicker.Date = sleep.Start.ToLocalTime().Date;
+                StartTimePicker.Time = sleep.Start.ToLocalTime().TimeOfDay;
+                EndDatePicker.Date = sleep.End.ToLocalTime().Date;
+                EndTimePicker.Time = sleep.End.ToLocalTime().TimeOfDay;
+            }
+        }
+#endif
 
         private async void OnSaveClicked(object sender, EventArgs e)
         {
