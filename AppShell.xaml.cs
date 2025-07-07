@@ -10,7 +10,7 @@ namespace MigraineTracker
             Routing.RegisterRoute(nameof(AddMigrainePage), typeof(AddMigrainePage));
             Routing.RegisterRoute(nameof(AddSupplementPage), typeof(AddSupplementPage));
             Routing.RegisterRoute(nameof(AddMealPage), typeof(AddMealPage));
-            Routing.RegisterRoute(nameof(AddWaterPage), typeof(AddWaterPage));
+            Routing.RegisterRoute(nameof(AddDrinkPage), typeof(AddDrinkPage));
             Routing.RegisterRoute(nameof(AddSleepPage), typeof(AddSleepPage));
         }
     }

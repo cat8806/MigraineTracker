@@ -86,7 +86,7 @@
 	  <MauiXaml Update="Views\AddSupplementPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-          <MauiXaml Update="Views\AddWaterPage.xaml">
+          <MauiXaml Update="Views\AddDrinkPage.xaml">
             <Generator>MSBuild:Compile</Generator>
           </MauiXaml>
           <MauiXaml Update="Views\MainPage.xaml">

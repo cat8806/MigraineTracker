@@ -5,9 +5,9 @@ using Microsoft.Maui.Controls;
 
 namespace MigraineTracker.Views
 {
-    public partial class AddWaterPage : ContentPage
+    public partial class AddDrinkPage : ContentPage
     {
-        public AddWaterPage()
+        public AddDrinkPage()
         {
             InitializeComponent();
             // default the TimePicker to the current time
@@ -23,16 +23,17 @@ namespace MigraineTracker.Views
                 return;
             }
 
-            var entry = new WaterIntakeEntry
+            var entry = new DrinkEntry
             {
                 Id = Guid.NewGuid(),
                 Date = DateTime.Today,
+                DrinkType = DrinkTypeEntry.Text?.Trim() ?? "Water",
                 VolumeMl = volume,
                 Time = DateTime.Now   // ← use now directly
             };
 
             using var db = new MigraineTrackerDbContext();
-            db.WaterIntakes.Add(entry);
+            db.Drinks.Add(entry);
             await db.SaveChangesAsync();
 
             await DisplayAlert("Saved", $"{volume} mL added!", "OK");
@@ -48,16 +49,17 @@ namespace MigraineTracker.Views
                 return;
             }
 
-            var entry = new WaterIntakeEntry
+            var entry = new DrinkEntry
             {
                 Id = Guid.NewGuid(),
                 Date = DateTime.Today,
+                DrinkType = DrinkTypeEntry.Text?.Trim() ?? "Water",
                 VolumeMl = volume,
                 Time = DateTime.Today + TimePicker.Time
             };
 
             using var db = new MigraineTrackerDbContext();
-            db.WaterIntakes.Add(entry);
+            db.Drinks.Add(entry);
             await db.SaveChangesAsync();
 
             await DisplayAlert("Saved", $"{volume} mL added!", "OK");

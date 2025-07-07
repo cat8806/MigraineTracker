@@ -91,15 +91,15 @@
                                LineBreakMode="WordWrap"/>
 
                         <Label Style="{StaticResource CardBody}"
-                               Text="{Binding WaterProgress}"
+                               Text="{Binding DrinkProgress}"
                                Margin="0,4,0,0"/>
 
                         <Button Style="{StaticResource CardButton}"
                                 Text="+ Add Meal"
                                 Clicked="OnAddMealClicked"/>
                         <Button Style="{StaticResource CardButton}"
-                                Text="+ Add Water"
-                                Clicked="OnAddWaterClicked"
+                                Text="+ Add Drink"
+                                Clicked="OnAddDrinkClicked"
                                 Margin="0,8,0,0" />
                     </StackLayout>
                 </VerticalStackLayout>

@@ -143,18 +143,18 @@ public partial class ReportsPageViewModel : ObservableObject
             });
         }
 
-        var waterIntakes = await db.WaterIntakes
+        var drinks = await db.Drinks
             .Where(w => w.Date >= StartDate && w.Date <= EndDate)
             .ToListAsync();
 
-        foreach (var w in waterIntakes)
+        foreach (var w in drinks)
         {
             var time = w.Time ?? w.Date;
             list.Add(new ReportItem
             {
                 Time = time,
                 Icon = "\uD83D\uDCA7", // 💧
-                Text = $"Water {w.VolumeMl} mL"
+                Text = $"{w.DrinkType} {w.VolumeMl} mL"
             });
         }
 
