@@ -19,7 +19,7 @@
         <Label Text="Drink Type" FontAttributes="Bold"/>
         <Entry x:Name="DrinkTypeEntry" Text="Water" Placeholder="e.g. Water"/>
 
-        <Label Text="Or enter custom amount:" FontAttributes="Bold"/>
+        <Label Text="Enter custom amount:" FontAttributes="Bold"/>
         <Entry x:Name="CustomEntry" 
            Keyboard="Numeric" 
            Placeholder="e.g. 350"/>
