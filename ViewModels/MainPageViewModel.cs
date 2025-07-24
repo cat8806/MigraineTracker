@@ -145,7 +145,9 @@ namespace MigraineTracker.ViewModels
         public async Task LoadLatestSleepAsync()
         {
             using var db = new MigraineTrackerDbContext();
+            var cutoff = DateTime.Today.AddDays(-1);
             var latest = await db.Sleeps
+                .Where(s => (s.SleepEnd ?? s.Date) >= cutoff)
                 .OrderByDescending(s => s.Date)
                 .ThenByDescending(s => s.SleepEnd)
                 .FirstOrDefaultAsync();
@@ -160,7 +162,7 @@ namespace MigraineTracker.ViewModels
             }
             else
             {
-                SleepSummary = "No sleep logged yet.";
+                SleepSummary = "No recent sleep logged.";
             }
         }
         // Boilerplate for INotifyPropertyChanged
