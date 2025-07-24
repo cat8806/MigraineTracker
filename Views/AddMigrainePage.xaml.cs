@@ -24,6 +24,7 @@ namespace MigraineTracker.Views
                 Date = DatePicker.Date,
                 StartTime = DatePicker.Date + StartTimePicker.Time,
                 EndTime = DatePicker.Date + EndTimePicker.Time,
+                Posture = PosturePicker.SelectedItem?.ToString() ?? "Seated",
                 Severity = (int)SeveritySlider.Value,
                 Triggers = TriggersEntry.Text ?? "",
                 Notes = NotesEditor.Text ?? ""

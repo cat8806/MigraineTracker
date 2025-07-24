@@ -16,6 +16,17 @@
             <Label Text="End Time"/>
             <TimePicker x:Name="EndTimePicker" />
 
+            <Label Text="Posture"/>
+            <Picker x:Name="PosturePicker">
+                <Picker.Items>
+                    <x:String>Supine</x:String>
+                    <x:String>SideLying</x:String>
+                    <x:String>Reclined30</x:String>
+                    <x:String>Seated</x:String>
+                    <x:String>Standing</x:String>
+                </Picker.Items>
+            </Picker>
+
             <Label Text="Severity (1-10)"/>
             <Slider x:Name="SeveritySlider"
                     Minimum="1"
