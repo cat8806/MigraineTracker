@@ -98,6 +98,9 @@ public partial class ReportsPageViewModel : ObservableObject
                 $"Migraine Severity: {m.Severity}/10"               // now explicitly labeled
             };
 
+            if (!string.IsNullOrWhiteSpace(m.Posture))
+                segments.Add($"Posture: {m.Posture}");
+
             if (!string.IsNullOrWhiteSpace(m.Triggers))
                 segments.Add($"Triggers: {m.Triggers.Replace(";", ", ")}");
 

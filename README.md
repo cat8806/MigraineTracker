@@ -8,7 +8,7 @@ A lightweight .NET MAUI app for logging migraine episodes and daily factors.
 - Add migraine episodes (start/end, posture, severity, triggers, notes)
 - Log meals, water, supplements, sleep
 - View and delete entries in the **Timeline** page
-- Quick trend reports (more coming)
+- Quick trend reports now include posture alongside severity and triggers
 - Manual export/import backups from the **Settings** tab (Android export lets you choose the destination folder)
 
 ## Project Structure
