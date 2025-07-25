@@ -24,6 +24,7 @@
                     <x:String>Reclined30</x:String>
                     <x:String>Seated</x:String>
                     <x:String>Standing</x:String>
+                    <x:String>Other</x:String>
                 </Picker.Items>
             </Picker>
 
