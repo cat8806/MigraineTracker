@@ -14,7 +14,7 @@ namespace MigraineTracker.Models
         public DateTime? EndTime { get; set; }
         /// <summary>
         /// Body position when the migraine occurred.
-        /// "Supine", "SideLying", "Reclined30", "Seated", or "Standing".
+        /// "Supine", "SideLying", "Reclined30", "Seated", "Standing", or "Other".
         /// </summary>
         public string? Posture { get; set; }
         public int Severity { get; set; } // 1–10 (or whatever scale you use)
